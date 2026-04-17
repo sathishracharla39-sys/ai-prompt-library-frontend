@@ -1,0 +1,22 @@
+
+<h2>All Prompts</h2>
+<input type="text" [(ngModel)]="searchText" placeholder="Search prompts..." />
+
+<div class="card-container">
+  <div class="card" *ngFor="let prompt of sortedPrompts()">
+
+    <h3>{{ prompt.title }}</h3>
+    <p>{{ prompt.content }}</p>
+    <small>Complexity: {{ prompt.complexity }}</small>
+
+    <div class="actions">
+      <button [routerLink]="['/edit', prompt.id]">Edit</button>
+      <button (click)="deletePrompt(prompt.id)">Delete</button>
+    </div>
+
+  </div>
+</div>
+
+<p *ngIf="!loading && sortedPrompts().length === 0">
+  No prompts found
+</p>

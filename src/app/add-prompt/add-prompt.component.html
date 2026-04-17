@@ -1,0 +1,16 @@
+<h2>Add Prompt</h2>
+
+<form (ngSubmit)="addPrompt()">
+
+  <label>Title:</label><br>
+  <input type="text" [(ngModel)]="prompt.title" name="title" required><br><br>
+
+  <label>Content:</label><br>
+  <textarea [(ngModel)]="prompt.content" name="content" required></textarea><br><br>
+
+  <label>Complexity:</label><br>
+  <input type="number" [(ngModel)]="prompt.complexity" name="complexity" required><br><br>
+
+  <button type="submit">Add</button>
+
+</form>

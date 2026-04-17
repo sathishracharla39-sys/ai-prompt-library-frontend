@@ -1,1 +1,80 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #2f3640;
+}
+
+h2 {
+  color: #353b48;
+}
+
+a {
+  text-decoration: none;
+  color: #0984e3;
+  font-weight: bold;
+}
+
+button {
+  margin-left: 8px;
+  padding: 5px 10px;
+  border: none;
+  background: #0984e3;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #74b9ff;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+  width: 300px;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+hr {
+  margin: 20px 0;
+}/* You can add global styles to this file, and also import other style files */
+/* 🌙 DARK MODE */
+
+body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark .card {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+body.dark button {
+  background-color: #333;
+  color: white;
+}
+
+body.dark input {
+  background-color: #222;
+  color: white;
+  border: 1px solid #555;
+}

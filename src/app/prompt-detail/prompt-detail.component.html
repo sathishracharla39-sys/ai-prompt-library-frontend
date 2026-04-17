@@ -1,0 +1,11 @@
+<h2>Prompt Detail</h2>
+
+<div *ngIf="prompt; else loading">
+  <h3>{{ prompt.title }}</h3>
+  <p>{{ prompt.content }}</p>
+  <p>Complexity: {{ prompt.complexity }}</p>
+</div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
