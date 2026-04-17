@@ -10,28 +10,23 @@ export class PromptService {
 
   constructor(private http: HttpClient) {}
 
-  // GET ALL
   getPrompts() {
     return this.http.get(this.apiUrl);
   }
 
-  // GET BY ID
-  getPromptById(id: any) {
+  getPromptById(id: number) {
     return this.http.get(`${this.apiUrl}${id}/`);
   }
 
-  // ADD
   addPrompt(data: any) {
     return this.http.post(this.apiUrl, data);
   }
 
-  // DELETE
-  deletePrompt(id: any) {
-    return this.http.delete(`${this.apiUrl}${id}/`);
+  updatePrompt(id: number, data: any) {   // ✅ ADD THIS
+    return this.http.put(`${this.apiUrl}${id}/`, data);
   }
 
-  // UPDATE ⭐ NEW
-  updatePrompt(id: any, data: any) {
-    return this.http.put(`${this.apiUrl}${id}/`, data);
+  deletePrompt(id: number) {
+    return this.http.delete(`${this.apiUrl}${id}/`);
   }
 }

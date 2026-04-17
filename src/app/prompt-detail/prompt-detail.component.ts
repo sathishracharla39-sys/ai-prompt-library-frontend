@@ -21,7 +21,7 @@ export class PromptDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log("DETAIL COMPONENT LOADED");  // ✅ DEBUG
 
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     console.log("ID:", id); // ✅ DEBUG
 
     this.promptService.getPromptById(id).subscribe((data: any) => {
