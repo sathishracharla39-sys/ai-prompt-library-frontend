@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PromptService {
 
-  private apiUrl = 'https://ai-prompt-library-backend-wez0.onrender.com/prompts/';
+  private apiUrl = 'https://ai-prompt-library-backend-hq8c.onrender.com/prompts/';
 
   constructor(private http: HttpClient) {}
 
