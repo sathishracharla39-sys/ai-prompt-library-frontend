@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { PromptService } from '../services/prompt.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { PromptService } from '../services/prompt.service';
 
 @Component({
   selector: 'app-add-prompt',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './add-prompt.component.html'
 })
 export class AddPromptComponent {
@@ -19,17 +20,9 @@ export class AddPromptComponent {
 
   constructor(private service: PromptService, private router: Router) {}
 
-  addPrompt() {
-  console.log("Submitting", this.prompt);   // ✅ DEBUG
-
-  this.service.addPrompt(this.prompt).subscribe({
-    next: () => {
-      alert("Prompt added successfully");
+  submit() {
+    this.service.addPrompt(this.prompt).subscribe(() => {
       this.router.navigate(['/']);
-    },
-    error: (err) => {
-      console.error(err);
-    }
-  });
-}
+    });
+  }
 }

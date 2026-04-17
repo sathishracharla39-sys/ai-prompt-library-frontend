@@ -1,43 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PromptService } from '../services/prompt.service';
 
 @Component({
   selector: 'app-edit-prompt',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './edit-prompt.component.html'
 })
 export class EditPromptComponent implements OnInit {
 
-  prompt: any = {
-    title: '',
-    content: '',
-    complexity: 1
-  };
-
-  id: any;
+  id!: number;
+  prompt: any = {};
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private promptService: PromptService
+    private service: PromptService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-
-    this.promptService.getPromptById(this.id).subscribe((data: any) => {
+  ngOnInit() {
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.service.getPromptById(this.id).subscribe(data => {
       this.prompt = data;
     });
   }
 
   update() {
-    this.promptService.updatePrompt(this.id, this.prompt).subscribe(() => {
-      alert("Updated successfully");
-      this.router.navigate(['/prompts']);
+    this.service.updatePrompt(this.id, this.prompt).subscribe(() => {
+      this.router.navigate(['/']);
     });
   }
 }

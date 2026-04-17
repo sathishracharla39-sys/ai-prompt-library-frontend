@@ -1,67 +1,39 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';   // ✅ CORRECT PLACE
 import { PromptService } from '../services/prompt.service';
 
 @Component({
   selector: 'app-prompt-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule], // ✅ CORRECT
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './prompt-list.component.html'
 })
 export class PromptListComponent implements OnInit {
 
   prompts: any[] = [];
   searchText: string = '';
-  sortOrder: string = '';
   loading = true;
 
-  constructor(
-    private promptService: PromptService,
-    private cdr: ChangeDetectorRef   // ⭐ IMPORTANT
-  ) {}
+  constructor(private service: PromptService) {}
 
-  ngOnInit(): void {
-    console.log("LIST COMPONENT LOADED");
-
-    this.promptService.getPrompts().subscribe({
-      next: (data: any) => {
-        console.log("DATA RECEIVED:", data);
-
-        this.prompts = data;
-        this.loading = false;
-
-        this.cdr.detectChanges();   // ⭐ FORCE UPDATE
-      },
-      error: (err) => {
-        console.error("ERROR:", err);
-      }
+  ngOnInit() {
+    this.service.getPrompts().subscribe((data: any) => {
+      this.prompts = data;
+      this.loading = false;
     });
+  }
+
+  sortedPrompts() {
+    return this.prompts.filter(p =>
+      p.title.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
 
   deletePrompt(id: number) {
-  if (confirm("Are you sure you want to delete?")) {
-    this.promptService.deletePrompt(id).subscribe(() => {
+    this.service.deletePrompt(id).subscribe(() => {
       this.ngOnInit();
     });
   }
-}
-filteredPrompts() {
-  return this.prompts.filter(p =>
-    p.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-    p.content.toLowerCase().includes(this.searchText.toLowerCase())
-  );
-}
-
-sortedPrompts() {
-  let data = this.filteredPrompts();
-
-  if (this.sortOrder === 'low') {
-    return data.sort((a, b) => a.complexity - b.complexity);
-  } else if (this.sortOrder === 'high') {
-    return data.sort((a, b) => b.complexity - a.complexity);
-  }
-  return data;
-}
 }

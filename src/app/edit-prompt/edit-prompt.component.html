@@ -1,16 +1,12 @@
 <h2>Edit Prompt</h2>
 
-<form (ngSubmit)="update()">
+<label>Title:</label><br>
+<input [(ngModel)]="prompt.title"><br><br>
 
-  <label>Title:</label><br>
-  <input [(ngModel)]="prompt.title" name="title"><br><br>
+<label>Content:</label><br>
+<textarea [(ngModel)]="prompt.content"></textarea><br><br>
 
-  <label>Content:</label><br>
-  <textarea [(ngModel)]="prompt.content" name="content"></textarea><br><br>
+<label>Complexity:</label><br>
+<input [(ngModel)]="prompt.complexity" type="number"><br><br>
 
-  <label>Complexity:</label><br>
-  <input type="number" [(ngModel)]="prompt.complexity" name="complexity"><br><br>
-
-  <button type="submit">Update</button>
-
-</form>
+<button (click)="update()">Update</button>
